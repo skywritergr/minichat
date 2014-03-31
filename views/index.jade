@@ -1,0 +1,21 @@
+extends layout
+
+block append head
+    script(src="/javascripts/index.js")
+
+block content
+  div#mainDiv(class="container center-block")
+      h1= title
+      h2
+          small Simple chat for human beings.
+      table#enterchat
+          tr
+              td(colspan=2)
+                button#newchat(type="submit",class="btn-primary btn-lg btn-block",onclick="newChat();") Create a new chat
+          tr
+              td
+                input#chatname(type="text", placeholder="Enter Chatroom name")
+              td
+                 button#enterchatBtn(type="submit",class="btn-success btn-sm btn-block",onclick="enterChat();") Enter
+  h6#footer Made with love in London by
+      a(href="http://www.georgestefanis.com")  George

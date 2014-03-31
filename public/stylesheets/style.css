@@ -1,0 +1,81 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #F6F5F5 !important;
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1, h2, label {
+    color: #4E2E28 !important;
+}
+
+#siteName{
+    position: absolute;
+    left: 30px;
+    top: 5px;
+    font-family: "pacificoregular","Helvetica Neue Light", Arial;
+
+}
+
+#siteName a{
+    text-decoration: none;
+    color: #4E2E28;
+}
+
+#mainDiv{
+    text-align: center;
+    margin-top: 70px;
+}
+
+#footer {
+    position: absolute;
+    bottom: 5px;
+    text-align: center;
+}
+
+#enterchat{
+    margin: 0 auto;
+}
+
+#enterchatBtn{
+    width: 40px;
+}
+
+#send{
+    margin-left: 10px;
+}
+
+tr{
+    height: 40px;
+}
+
+tr td{
+    padding-right: 5px;
+}
+
+@font-face {
+    font-family: 'quicksandlight';
+    src: url('/fonts/quicksand-light-webfont.eot');
+    src: url('/fonts/quicksand-light-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/quicksand-light-webfont.woff') format('woff'),
+    url('/fonts/quicksand-light-webfont.ttf') format('truetype'),
+    url('/fonts/quicksand-light-webfont.svg#quicksandlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'pacificoregular';
+    src: url('/fonts/pacifico-webfont.eot');
+    src: url('/fonts/pacifico-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pacifico-webfont.woff') format('woff'),
+    url('/fonts/pacifico-webfont.ttf') format('truetype'),
+    url('/fonts/pacifico-webfont.svg#pacificoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

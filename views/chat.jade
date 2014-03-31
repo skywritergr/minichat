@@ -1,0 +1,30 @@
+extends layout
+
+block append head
+    link(rel='stylesheet', href='/stylesheets/chat.css')
+
+    script(src="/javascripts/emoticons.js")
+    script(src="/javascripts/chat.js")
+
+block content
+    table#chatTbl(class="table-responsive")
+        tr
+            td
+                h2 Chat room:
+                    small #{room}
+        tr
+            td
+                label(for="userName") User name: (Hit Enter)
+                span
+                input#userName(type="text")
+                span#feedback
+        tr
+            td#msgWindow(class="form-control form-group", colspan=2)
+        tr
+            td
+                input#msg(type="text", disabled="true")
+                button#send(value="", type="submit", onclick="sendMessage();", class="btn-default btn-sm") Send
+        tr
+            td
+                div(class="fileButton") Send Image:
+                input#imagefile(type="file", accept="image/*")

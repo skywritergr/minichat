@@ -1,0 +1,79 @@
+#msgWindow {
+    white-space: pre;
+    overflow-y: auto;
+    overflow-x: none;
+}
+
+#msg{
+    width: 86%;
+}
+
+#userName {
+    width: 35%;
+}
+
+@media screen and (min-height: 700px) {
+    #msgWindow {
+        height: 450px;
+    }
+}
+
+/*style for iphone screen, mobile phones etc*/
+@media screen and (max-height: 600px) {
+    #msgWindow {
+        height: 150px;
+        width: 240px;
+    }
+
+    #msg {
+        width: 180px;
+    }
+
+    #userName {
+        width: 80px;
+    }
+}
+
+@media screen and (min-height: 600px) and (max-height: 700px) {
+    #msgWindow {
+        height: 320px;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    #msgWindow {
+        width: 600px;
+    }
+}
+
+.shadow {
+    box-shadow: 2px 2px 4px 1px #000000;
+    padding-top: 10px;
+    padding-right: 1px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+}
+.allMsg {
+}
+
+.privMsg {
+    font-style:italic;
+}
+
+.adminMsg {
+    font-face: "verdana, helvetica";
+    font-size: 8;
+}
+
+#chatTbl {
+    margin: 0 auto;
+    border: none !important;
+}
+
+label {
+    margin-right: 1em;
+}
+
+small{
+    margin-left: 1em;
+}
