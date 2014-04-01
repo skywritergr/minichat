@@ -1,5 +1,6 @@
 var socket;
 var myUserName;
+var room;
 
 function escapeHTML(text) {
     return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&#34;");
@@ -50,8 +51,7 @@ function setFeedback(fb) {
 
 function setUsername() {
     myUserName = $('input#userName').val();
-    socket.emit('set username', $('input#userName').val(), function(data) { console.log('emit set username', data); });
-//    console.log('Set user name as ' + $('input#userName').val());
+    socket.emit('set username', $('input#userName').val(), room);
 }
 
 function sendMessage() {

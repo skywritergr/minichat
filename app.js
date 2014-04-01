@@ -41,12 +41,13 @@ var server = app.listen(app.get('port'), function(){
 
 var io = socketio.listen(server,{ log: false });
 var clients = {};
+var myRoom;
 
 var socketsOfClients = {};
 io.sockets.on('connection', function(socket) {
 
     socket.on('room', function(room) {
-        console.log('room = '+room);
+        myRoom = room;
         socket.join(room);
     });
 
@@ -55,14 +56,14 @@ io.sockets.on('connection', function(socket) {
         socket.broadcast.in(msg.room).emit('user image', msg.user, msg.data);
     });
 
-    socket.on('set username', function(userName) {
+    socket.on('set username', function(userName, room) {
         // Is this an existing user name?
         if (clients[userName] === undefined) {
             // Does not exist ... so, proceed
             clients[userName] = socket.id;
             socketsOfClients[socket.id] = userName;
-            userNameAvailable(socket.id, userName);
-            userJoined(userName);
+            userNameAvailable(socket.id, userName, room);
+            userJoined(userName,room);
         } else
         if (clients[userName] === socket.id) {
             // Ignore for now
@@ -89,30 +90,34 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('disconnect', function() {
         var uName = socketsOfClients[socket.id];
+        var room = io.sockets.manager.roomClients[socket.id];
         delete socketsOfClients[socket.id];
         delete clients[uName];
 
         // relay this message to all the clients
-
-        userLeft(uName);
+        if(uName !== undefined){
+            userLeft(uName,room);
+        }
     });
 });
 
-function userJoined(uName) {
-    Object.keys(socketsOfClients).forEach(function(sId) {
-        io.sockets.sockets[sId].emit('userJoined', { "userName": uName });
-    })
+function userJoined(uName,room) {
+    io.sockets.in(room).emit('userJoined', { "userName": uName });
 }
 
-function userLeft(uName) {
-    io.sockets.emit('userLeft', { "userName": uName });
+function userLeft(uName,rooms) {
+    for(room in rooms)
+        if (room.length > 0) { // if not the global room ''
+            room = room.substr(1); // remove leading '/'
+            console.log('leaving room = '+room);
+            io.sockets.in(room).emit('userLeft', { "userName": uName });
+        }
 }
 
-function userNameAvailable(sId, uName) {
+function userNameAvailable(sId, uName, room) {
     setTimeout(function() {
-
-        console.log('Sending welcome msg to ' + uName + ' at ' + sId);
-        io.sockets.sockets[sId].emit('welcome', { "userName" : uName, "currentUsers": JSON.stringify(Object.keys(clients)) });
+        console.log('Sending welcome msg to ' + uName + ' at ' + sId + ' in '+room);
+        io.sockets.in(room).emit('welcome', { "userName" : uName, "currentUsers": JSON.stringify(Object.keys(clients)) });
 
     }, 500);
 }
