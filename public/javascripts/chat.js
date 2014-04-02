@@ -21,6 +21,7 @@ function enableUsernameField(enable) {
 function simpleAppendMessage(msg){
     var html = "<span class='allMsg'>" + msg + "</span><br/>";
     $('#msgWindow').append(html);
+    $('#msgWindow').scrollTop($('#msgWindow').get(0).scrollHeight);
 }
 
 function appendNewMessage(msg) {
@@ -41,6 +42,7 @@ function appendNewMessage(msg) {
 
     html = "<span class='allMsg'>" + "<strong>"+msg.source+"</strong>" + " : " + message + "</span><br/>";
     $('#msgWindow').append(html);
+    $('#msgWindow').scrollTop($('#msgWindow').get(0).scrollHeight);
 }
 
 socket = io.connect();
@@ -69,6 +71,7 @@ function sendMessage() {
 
 function image (from, base64Image) {
     $('#msgWindow').append($('<p>').append($('<b>').text(from), '<img src="' + base64Image + '"/>'));
+    $('#msgWindow').scrollTop($('#msgWindow').get(0).scrollHeight);
 }
 
 $(function() {
@@ -96,6 +99,7 @@ $(function() {
 
     socket.on('user image', function (from, base64Image) {
         $('#msgWindow').append($('<p>').append($('<b>').text(from),' : ', '<img src="' + base64Image + '"/>'));
+        $('#msgWindow').scrollTop($('#msgWindow').get(0).scrollHeight);
     });
 
     socket.on('welcome', function(msg) {
